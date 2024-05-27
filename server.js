@@ -6,7 +6,7 @@ const CsvModel = require('./model/csvModel')
 const mongoose = require('mongoose');
 const { type } = require('os');
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 const upload = multer({ dest: 'uploads/' });
 
 
