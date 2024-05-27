@@ -10,7 +10,7 @@ const port = process.env.PORT || 3000;
 const upload = multer({ dest: 'uploads/' });
 
 
-mongoose.connect('mongodb://localhost:27017/csvdb');
+mongoose.connect('mongodb+srv://saahilaliofficial:OFN8hihucnGuWEbp@cluster0.vvdjbcn.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0');
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static('public'));
