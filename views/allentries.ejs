@@ -1,0 +1,40 @@
+<%- include('partials/header'); -%>
+    <h1>All Entries</h1>
+
+    <ul>
+      <% entries.forEach(entry => { %>
+      <li>
+        id : <%= entry._id %><br />
+        Date: <%= entry.date %><br />
+        Bill Number: <%= entry.billNumber %><br />
+        Name: <%= entry.name %><br />
+        Amount: <%= entry.amount %><br />
+        Is Packed: <%= entry.isPacked ? 'Yes' : 'No' %><br />
+        Barcode: <%= entry.assignedBarcode %><br />
+        <form action="/assigncode" method="post">
+          <input type="hidden" name="entryId" value="<%= entry._id %>" />
+          <input
+            name="barcode"
+            type="text"
+            placeholder="Scan or enter barcode"
+          />
+          <button type="submit">Assign Barcode</button><br />
+        </form>
+
+        <label>Choose a captain:</label><br>
+        <form action="/assigndeliveryboy" method="post">
+          <input type="hidden" name="entryId" value="<%= entry._id %>" />
+          <select name="captain">
+            <option value="">Select captain here</option>
+            <option value="cap1">Cap1</option>
+            <option value="cap2">cap2</option>
+            <option value="cap3">cap3</option>
+            <option value="cap4">cap4</option>
+          </select>
+          <button type="submit">Submit</button>
+        </form>
+        Delivered By : <%= entry.deliveredBy %>
+      </li>
+      <% }); %>
+    </ul>
+    <%- include('partials/footer'); -%>

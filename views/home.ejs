@@ -1,0 +1,43 @@
+<%- include('partials/header'); -%>
+    <h1>Welcome to Delivery Management System</h1>
+    <form action="/submitexcel" method="post" enctype="multipart/form-data">
+        <label>Upload your .csv file</label>
+        <input type="file" name="csvdata" id="csvdata" accept=".csv" onchange="previewCSV(event)">
+        <button type="submit">Submit</button>
+    </form>
+    <div id="preview">
+    </div>
+
+    <script>
+        function previewCSV(event) {
+            const file = event.target.files[0];
+            if (!file) {
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const text = e.target.result;
+                const rows = text.split('\n');
+                let html = '<table border="1">';
+                
+                rows.forEach((row, rowIndex) => {
+                    const columns = row.split(',');
+                    html += '<tr>';
+                    columns.forEach(column => {
+                        if (rowIndex === 0) {
+                            html += `<th>${column.trim()}</th>`;
+                        } else {
+                            html += `<td>${column.trim()}</td>`;
+                        }
+                    });
+                    html += '</tr>';
+                });
+                
+                html += '</table>';
+                document.getElementById('preview').innerHTML = html;
+            };
+            reader.readAsText(file);
+        }
+    </script>
+<%- include('partials/footer'); -%>

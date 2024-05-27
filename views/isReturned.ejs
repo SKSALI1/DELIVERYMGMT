@@ -1,0 +1,21 @@
+<%- include('partials/header'); -%>
+    <form action="/isReturned" method="post">
+      <label>Scan the Barcode which is Returned</label>
+      <input type="text" name="returnedItems" />
+      <button type="submit">Mark As Returned</button>
+    </form>
+    <form action="/isUnReturned" method="post">
+        <label>Undo to Unreturned</label>
+        <input type="text" name="unReturnedItems" />
+        <button type="submit">Mark As Unreturned</button>
+      </form>
+    <% entries.forEach(entry => { %> 
+        <li>Date :<%= entry.date %></li> 
+        <li>Bill Number :<%= entry.billNumber %></li> 
+        <li>Party Name : <%= entry.name %></li> 
+        <li>Barcodes : <%= entry.assignedBarcode %></li>
+        <li>Delivered :<%= entry.isDelivered ? "delivered" : "undelivered" %></li>
+        <li>Returned :<%= entry.isReturned %></li><br>
+        
+    <% })%>
+    <%- include('partials/footer'); -%>
