@@ -1,0 +1,20 @@
+<%- include('partials/header'); -%>
+    <form action="/isDelivered" method="post">
+      <label>Scan the Barcode which is Delivered</label>
+      <input type="text" name="delivereditems" />
+      <button type="submit">Mark As Delivered</button>
+    </form>
+    <form action="/isUndelivered" method="post">
+        <label>Undo to undelivered</label>
+        <input type="text" name="undelivereditems" />
+        <button type="submit">Mark As Undelivered</button>
+      </form>
+    <% entries.forEach(entry => { %> 
+        <li>Date :<%= entry.date %></li> 
+        <li>Bill Number :<%= entry.billNumber %></li> 
+        <li>Party Name : <%= entry.name %></li> 
+        <li>Barcodes : <%= entry.assignedBarcode %></li>
+        <li>Delivered :<%= entry.isDelivered ? "delivered" : "undelivered" %></li><br>
+        
+    <% })%>
+    <%- include('partials/footer'); -%>
